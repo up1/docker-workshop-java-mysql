@@ -14,7 +14,7 @@ public class UserDao {
             String sql = "SELECT id, name FROM USER WHERE id=?";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             connection =
-                    DriverManager.getConnection("jdbc:mysql://my_database/test?" +
+                    DriverManager.getConnection("jdbc:mysql://my_database/sample?" +
                             "user=user01&password=password");
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
