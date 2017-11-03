@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UserDao {
+
     public User getUserBy(int id) {
         Connection connection;
         PreparedStatement preparedStatement;
@@ -14,8 +15,7 @@ public class UserDao {
             String sql = "SELECT id, name FROM USER WHERE id=?";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             connection =
-                    DriverManager.getConnection("jdbc:mysql://my_database/sample?" +
-                            "user=user01&password=password");
+                    DriverManager.getConnection(System.getenv("DATABASE_URL"));
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
 
