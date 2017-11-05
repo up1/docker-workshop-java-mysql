@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_api
+    restart: always
+    ports:
+      - "8080:8080"
+    links:
+      - my_database
+    depends_on:
+      - my_database
+
+  my_database:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile_data
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: sample
+      MYSQL_USER: user01
+      MYSQL_PASSWORD: password
