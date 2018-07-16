@@ -1,2 +1,2 @@
-FROM mysql:5.7.20
+FROM mysql:5.7
 COPY import.sql /docker-entrypoint-initdb.d/
