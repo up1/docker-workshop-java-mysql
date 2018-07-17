@@ -1,6 +1,9 @@
-FROM maven:3.5.2-jdk-8-alpine
+FROM maven:3.5.4-jdk-8-alpine
 WORKDIR /src
 COPY  . /src
+RUN mvn clean package
+# ENTRYPOINT ["mvn"]
+# CMD ["clean", "package"]
 
-ENTRYPOINT ["mvn"]
-CMD ["clean", "package"]
+#docker image build -t build:0.1 -f Dockerfile_build .
+#docker container run build:0.1 sh -c "mvn clean package"

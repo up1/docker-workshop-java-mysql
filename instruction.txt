@@ -1,0 +1,31 @@
+# Apache Maven https://hub.docker.com/_/maven/
+$docker image pull maven:3.5.4-jdk-8-alpine
+
+$docker container run --rm \
+ -v $(pwd):/demo/java \
+ -w /demo/java \
+maven:3.5.4-jdk-8-alpine mvn clean package
+
+$docker container run --rm \
+ -v %CD%:/demo/java \
+ -w /demo/java \
+maven:3.5.4-jdk-8-alpine mvn clean package
+
+# Build with dockerfile + maven
+
+FROM maven:3.5.4-jdk-8-alpine
+WORKDIR /src
+COPY  . /src
+RUN mvn clean package
+
+#Create image
+$docker image build -t build:0.1 -f Dockerfile_build .
+
+#Copy file from container to host
+$docker container run --rm \
+ -v $(pwd)/war:/tmp/war \
+ build:0.1 \
+ sh -c "cp /src/target/api.war /tmp/war"
+
+#Deploy :: build image
+$docker image build -t deploy:0.1 -f Dockerfile_deploy .

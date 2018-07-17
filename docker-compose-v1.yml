@@ -1,0 +1,13 @@
+#docker-compose-v1.yml
+#docker-compose -f docker-compose-v1.yml build
+#docker-compose -f docker-compose-v1.yml up -d
+#docker-compose -f docker-compose-v1.yml scale api=5
+#docker-compose -f docker-compose-v1.yml down
+version: '3'
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile_steps
+    # ports:
+    #  - "8080:8080"
