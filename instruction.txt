@@ -29,3 +29,18 @@ $docker container run --rm \
 
 #Deploy :: build image
 $docker image build -t deploy:0.1 -f Dockerfile_deploy .
+
+# Create container of MySQL
+$docker container run -d \
+  --name=db \
+  -e "MYSQL_ROOT_PASSWORD=mypassword" \
+  -e "MYSQL_DATABASE=sample" \
+  -e "MYSQL_USER=user01" \
+  -e "MYSQL_PASSWORD=password" \
+ mysql:5.7
+
+
+ # API container
+ $docker container run -p 8080:8080 \
+   --link db:db:my_database \
+   docker-workshop-java-mysql_api

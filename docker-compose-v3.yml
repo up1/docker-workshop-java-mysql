@@ -1,0 +1,21 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile_steps
+    ports:
+     - "8080:8080"
+    links:
+     # - SERVICE:ALIAS  
+     - db:my_database
+
+  db:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile_data
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypassword
+      - MYSQL_DATABASE=sample
+      - MYSQL_USER=user01
+      - MYSQL_PASSWORD=password
