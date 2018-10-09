@@ -42,5 +42,5 @@ $docker container run -d \
 
  # API container
  $docker container run -p 8080:8080 \
-   --link db:db:my_database \
+   --link db:my_database \
    docker-workshop-java-mysql_api
