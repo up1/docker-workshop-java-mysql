@@ -1,15 +1,20 @@
 # Apache Maven https://hub.docker.com/_/maven/
 $docker image pull maven:3.5.4-jdk-8-alpine
 
+For Mac/Linux
 $docker container run --rm \
  -v $(pwd):/demo/java \
  -w /demo/java \
 maven:3.5.4-jdk-8-alpine mvn clean package
 
+For Windows
 $docker container run --rm \
  -v %CD%:/demo/java \
  -w /demo/java \
 maven:3.5.4-jdk-8-alpine mvn clean package
+
+Using docker volume
+$container run --rm -w /src -v $(pwd):/src -v maven_lib:/root/.m2  maven:3.6.0-jdk-8-alpine mvn clean package
 
 # Build with dockerfile + maven
 
